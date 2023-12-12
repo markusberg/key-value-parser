@@ -1,0 +1,41 @@
+{
+  "name": "key-value-parser",
+  "version": "1.0.0",
+  "description": "Simple key-value parser",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:prep && npm run build:tsc",
+    "build:prep": "mkdir -p dist",
+    "build:tsc": "tsc -p ./tsconfig.prod.json",
+    "prep": "npm install && husky install && chmod ug+x .husky/*",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:watch:coverage": "vitest watch --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markusberg/key-value-parser.git"
+  },
+  "keywords": [
+    "key",
+    "value",
+    "env",
+    "file",
+    "parser"
+  ],
+  "author": "Markus Berg <markus@kelvin.nu>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/markusberg/key-value-parser/issues"
+  },
+  "homepage": "https://github.com/markusberg/key-value-parser#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^0.34.6",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3",
+    "vitest": "^0.34.6"
+  }
+}
