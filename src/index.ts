@@ -23,7 +23,7 @@ export function loadAndParse(file: string): KeyValue {
 export function parse(src: string): KeyValue {
   const obj: KeyValue = {}
   const rxKeyValue =
-    /^\s*([\w.-]+)\s*=\s*('(?:\\'|[^'])*'|"(?:\\"|[^"])*"|`(?:\\`|[^`])*`|[^#\n]+)?\s*(?:#.*)?$/gm
+    /^[ \t]*([\w.-]+)[ \t]*=[ \t]*('(?:\\'|[^'])*'|"(?:\\"|[^"])*"|`(?:\\`|[^`])*`|[^#\n]*)[ \t]*(?:#.*)?$/gm
 
   // Normalize line breaks
   const lines = src.replace(/\r\n?/gm, '\n')
