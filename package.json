@@ -1,17 +1,23 @@
 {
-  "name": "key-value-parser",
-  "version": "1.0.0",
+  "name": "@markusberg/key-value-parser",
+  "version": "0.1.0",
   "description": "Simple key-value parser",
-  "main": "index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "type": "module",
   "scripts": {
-    "build": "npm run build:prep && npm run build:tsc",
+    "build": "npm run clean && npm run build:prep && npm run build:tsc",
     "build:prep": "mkdir -p dist",
     "build:tsc": "tsc -p ./tsconfig.prod.json",
+    "clean": "rm -fr dist",
     "prep": "npm install && husky install && chmod ug+x .husky/*",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
     "test:watch:coverage": "vitest watch --coverage"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { join } from 'node:path'
 
-import { parse } from './index.js'
+import { loadAndParse, parse } from './index.js'
 
 describe('.env parser', () => {
   it('should handle leading and trailing white space', () => {
@@ -147,5 +148,26 @@ invalid%3= test
 
     const parsed = parse(envFile)
     expect(parsed).toStrictEqual({ valid: '23' })
+  })
+
+  it('should load and parse a key-value file', () => {
+    const envPath = join('.', 'src', 'test.env')
+    const parsed = loadAndParse(envPath)
+    expect(parsed).toStrictEqual({
+      MONGODB_HOST: 'mymongohost.example.com',
+      MONGODB_USER: 'username',
+      MONGODB_PASSWORD: 'bingo',
+      WITH_WHITE_SPACE: ' Hello ',
+      INFO_TEXT: `This is a multiline
+value. It can contain quotes other than the
+quotes surrounding it; "double-quote" for instance. Or you
+can escape it: ' `,
+      ANOTHER_QUOTE: 'The name\'s "Bond".',
+    })
+  })
+
+  it('should throw an exception when trying to load and parse a nonexistent file', () => {
+    const envPath = join('.', 'src', 'nonexistent.env')
+    expect(() => loadAndParse(envPath)).toThrow()
   })
 })

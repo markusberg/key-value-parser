@@ -30,8 +30,24 @@ export function parse(src: string): Record<string, string> {
     const value = (match[2] || '').trim()
 
     // Strip surrounding quotes while preserving whitespace within quotes
-    obj[key] = value.replace(/^(['"`])([\s\S]*)\1$/g, '$2')
+    obj[key] = stripSurroundingQuotes(value)
   }
 
   return obj
+}
+
+/**
+ * Strip surrounding quotes, and unescape content
+ */
+function stripSurroundingQuotes(value: string) {
+  const rx = /^(['"`])([\s\S]*)\1$/gm
+  if (rx.test(value)) {
+    const quoteChar = value.substring(0, 1)
+    const rxUnescape = new RegExp(`\\\\${quoteChar}`, 'gm')
+    return value
+      .replace(/^(['"`])([\s\S]*)\1$/g, '$2')
+      .replaceAll(rxUnescape, quoteChar)
+  } else {
+    return value
+  }
 }

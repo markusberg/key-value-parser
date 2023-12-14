@@ -41,7 +41,7 @@ can escape it: ' `
 If you already have your key-values in a string, you can pass it tot the `parse`-function:
 
 ```typescript
-import { parse } from 'key-value-parser'
+import { parse } from '@markusberg/key-value-parser'
 
 const mydata = `
 # This is an example file
@@ -69,7 +69,7 @@ The parsed data is always in the form of `Record<string, string>`. If you want t
 
 ```typescript
 import { z } from 'zod'
-import { loadAndParse } from 'key-value-parser'
+import { loadAndParse } from '@markusberg/key-value-parser'
 
 /**
  * Zod preprocessor
@@ -103,7 +103,7 @@ try {
 }
 
 /***
- * The exported data is guaranteed to have the following shape:
+ * The exported env is guaranteed to have the following shape:
  * {
  *   SERVER_HOST: string
  *   SERVER_PORT: number
