@@ -11,6 +11,14 @@ the following input:
 MONGODB_HOST=mymongohost.example.com
 MONGODB_USER=username
 MONGODB_PASSWORD=bingo # this is an inline comment
+
+# If you need to preserve leading or trailing white space, you need to use quotes
+WITH_WHITE_SPACE = ' Hello '
+
+INFO_TEXT = 'This is a multiline
+value. It can contain quotes other than the
+quotes surrounding it; " for instance. Or you
+can escape it: \' ' # this is a trailing comment
 ```
 
 You will get the following object back:
@@ -19,7 +27,12 @@ You will get the following object back:
 {
   "MONGODB_HOST": "mymongohost.example.com",
   "MONGODB_USER": "username",
-  "MONGODB_PASSWORD": "bingo"
+  "MONGODB_PASSWORD": "bingo",
+  "WITH_WHITE_SPACE": " Hello ",
+  "INFO_TEXT": `This is a multiline
+value. It can contain quotes other than the
+quotes surrounding it; " for instance. Or you
+can escape it: ' `
 }
 ```
 

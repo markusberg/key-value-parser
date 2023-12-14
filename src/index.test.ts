@@ -40,8 +40,7 @@ trailingWhitespace=three    # Here's a trailing comment
   it('should handle three types of quotes, and multiline values', () => {
     const keyValues = `singleQuotes='one'
 
-    #This= is a comment with an equal sign
-  doubleQuotes="two"
+doubleQuotes="two"
 backticks=\`three\`    # Here's a trailing comment
 
 multiline='one
@@ -70,9 +69,9 @@ three`,
   it('should handle key-value pairs and comments with hashtags and equal signs', () => {
     const envFile = `# This is my .env file
 
-# another comment
 withQuotes='five'
 withEqualSign="six=seven"
+withEqualSign2=six=seven
 withTrailingComment=eight # this is a comment
 withHash="nine # ten"
 
@@ -91,6 +90,7 @@ whitespace = ' eleven '
     expect(parsed).toStrictEqual({
       withQuotes: 'five',
       withEqualSign: 'six=seven',
+      withEqualSign2: 'six=seven',
       withTrailingComment: 'eight',
       withHash: 'nine # ten',
       multi: `apa
@@ -104,15 +104,11 @@ cykel`,
   it('should handle different types of empty values', () => {
     const envFile = `# Here's a comment
 empty=   ''
-
 test=one
-
 empty2=
 
 test2=two
-
 empty3=    # this is a comment
-
 test3='hello'
 
 `
@@ -126,5 +122,30 @@ test3='hello'
       empty3: '',
       test3: 'hello',
     })
+  })
+
+  it('should handle values with quotes', () => {
+    const envFile = `plain = The name's Bond, James Bond.
+escaped =   'It\'s'
+quotesWithinQuotes = "It's alright!"
+`
+
+    const parsed = parse(envFile)
+    expect(parsed).toStrictEqual({
+      plain: "The name's Bond, James Bond.",
+      escaped: "It's",
+      quotesWithinQuotes: "It's alright!",
+    })
+  })
+
+  it('should only allow keys with the following characters: [\\w.-]', () => {
+    const envFile = `valid=23
+inva#lid=value1
+invalid@2=hello
+invalid%3= test
+`
+
+    const parsed = parse(envFile)
+    expect(parsed).toStrictEqual({ valid: '23' })
   })
 })

@@ -1,15 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs'
 
-export interface KeyValue {
-  [key: string]: string
-}
-
 /**
  * Load file from disk and parse into KeyValue object
  * @param file
  * @returns
  */
-export function loadAndParse(file: string): KeyValue {
+export function loadAndParse(file: string): Record<string, string> {
   if (!existsSync(file)) {
     throw new Error(`key-value file doesn't exist: ${file}`)
   }
@@ -20,8 +16,8 @@ export function loadAndParse(file: string): KeyValue {
 /**
  * Key-value parsing logic
  */
-export function parse(src: string): KeyValue {
-  const obj: KeyValue = {}
+export function parse(src: string): Record<string, string> {
+  const obj: Record<string, string> = {}
   const rxKeyValue =
     /^[ \t]*([\w.-]+)[ \t]*=[ \t]*('(?:\\'|[^'])*'|"(?:\\"|[^"])*"|`(?:\\`|[^`])*`|[^#\n]*)[ \t]*(?:#.*)?$/gm
 
