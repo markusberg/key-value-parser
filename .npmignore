@@ -1,0 +1,8 @@
+coverage/
+src/
+.husky
+.lintstagedrc
+.nvmrc
+.prettierrc.json
+tsconfig.json
+tsconfig.prod.json

@@ -1,8 +1,8 @@
 # key-value-parser
 
-Simple key-value parser
+This is a simple and versatile `key=value` parser. It's useful for parsing configuration files similar to [dotenv](https://www.npmjs.com/package/dotenv), but without putting variables in your env.
 
-Given a KEY=value string, this parser will strip comments and empty lines and return a plain javascript object. For example, given
+Given a `KEY=value` string, this parser will strip comments and empty lines and return a plain javascript object. For example, given
 the following input:
 
 ```txt
@@ -17,7 +17,7 @@ WITH_WHITE_SPACE = ' Hello '
 
 INFO_TEXT = 'This is a multiline
 value. It can contain quotes other than the
-quotes surrounding it; " for instance. Or you
+quotes surrounding it; "double-quotes" for instance. Or you
 can escape it: \' ' # this is a trailing comment
 ```
 
@@ -31,10 +31,14 @@ You will get the following object back:
   "WITH_WHITE_SPACE": " Hello ",
   "INFO_TEXT": `This is a multiline
 value. It can contain quotes other than the
-quotes surrounding it; " for instance. Or you
+quotes surrounding it; "double-quotes" for instance. Or you
 can escape it: ' `
 }
 ```
+
+## Prerequisites
+
+`key-value-parser` supports Node.JS version 18 and up, and is only available as an ES-module.
 
 ## Usage
 

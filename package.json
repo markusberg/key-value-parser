@@ -1,6 +1,6 @@
 {
   "name": "@markusberg/key-value-parser",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Simple key-value parser",
   "exports": {
     ".": "./dist/index.js"
@@ -12,6 +12,7 @@
     "build:tsc": "tsc -p ./tsconfig.prod.json",
     "clean": "rm -fr dist",
     "prep": "npm install && husky install && chmod ug+x .husky/*",
+    "prepublishOnly": "npm run build",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
     "test:watch:coverage": "vitest watch --coverage"
