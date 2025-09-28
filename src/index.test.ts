@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { strict as assert } from 'node:assert'
 import { join } from 'node:path'
+import { describe, it } from 'node:test'
 
 import { loadAndParse, parse } from './index.js'
 
@@ -11,7 +12,7 @@ trailingWhitespace=three
   leadingAndTrailing=four   
 `
     const parsed = parse(keyValues)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       noLeadingOrTrailing: 'one',
       leadingWhitespace: 'two',
       trailingWhitespace: 'three',
@@ -30,7 +31,7 @@ trailingWhitespace=three    # Here's a trailing comment
   leadingAndTrailing=four   
 `
     const parsed = parse(keyValues)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       noLeadingOrTrailing: 'one',
       leadingWhitespace: 'two',
       trailingWhitespace: 'three',
@@ -54,7 +55,7 @@ three'
 
 `
     const parsed = parse(keyValues)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       singleQuotes: 'one',
       doubleQuotes: 'two',
       backticks: 'three',
@@ -88,7 +89,7 @@ whitespace = ' eleven '
 `
 
     const parsed = parse(envFile)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       withQuotes: 'five',
       withEqualSign: 'six=seven',
       withEqualSign2: 'six=seven',
@@ -115,7 +116,7 @@ test3='hello'
 `
 
     const parsed = parse(envFile)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       empty: '',
       test: 'one',
       empty2: '',
@@ -132,7 +133,7 @@ quotesWithinQuotes = "It's alright!"
 `
 
     const parsed = parse(envFile)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       plain: "The name's Bond, James Bond.",
       escaped: "It's",
       quotesWithinQuotes: "It's alright!",
@@ -147,13 +148,13 @@ invalid%3= test
 `
 
     const parsed = parse(envFile)
-    expect(parsed).toStrictEqual({ valid: '23' })
+    assert.deepStrictEqual(parsed, { valid: '23' })
   })
 
   it('should load and parse a key-value file', () => {
     const envPath = join('.', 'src', 'test.env')
     const parsed = loadAndParse(envPath)
-    expect(parsed).toStrictEqual({
+    assert.deepStrictEqual(parsed, {
       MONGODB_HOST: 'mymongohost.example.com',
       MONGODB_USER: 'username',
       MONGODB_PASSWORD: 'bingo',
@@ -168,6 +169,6 @@ can escape it: ' `,
 
   it('should throw an exception when trying to load and parse a nonexistent file', () => {
     const envPath = join('.', 'src', 'nonexistent.env')
-    expect(() => loadAndParse(envPath)).toThrow()
+    assert.throws(() => loadAndParse(envPath))
   })
 })

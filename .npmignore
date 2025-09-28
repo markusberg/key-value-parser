@@ -1,8 +1,13 @@
+.husky/
+.github/
+
+.prettierrc
+.node-version
+
 coverage/
 src/
-.husky
-.lintstagedrc
-.nvmrc
-.prettierrc.json
+
+index.ts
 tsconfig.json
 tsconfig.prod.json
+*.tsbuildinfo
