@@ -1,3 +1,8 @@
+[![node.js build](https://github.com/markusberg/key-value-parser/actions/workflows/main.yaml/badge.svg)](https://github.com/markusberg/key-value-parser/actions/workflows/main.yaml)
+![coverage](https://markusberg.github.io/key-value-parser/badges/coverage-1.0.0.svg)
+![version](https://img.shields.io/npm/v/key-value-parser.svg)
+[![license](https://img.shields.io/github/license/markusberg/key-value-parser.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 # key-value-parser
 
 This is a simple and versatile `key=value` parser. It's useful for parsing configuration files similar to [dotenv](https://www.npmjs.com/package/dotenv), but without putting variables in your env.
@@ -38,11 +43,11 @@ can escape it: ' `
 
 ## Prerequisites
 
-`key-value-parser` supports Node.JS version 18 and up, and is only available as an ES-module.
+`key-value-parser` supports Node.JS version 20 and up, and is only available as an ES-module.
 
 ## Usage
 
-If you already have your key-values in a string, you can pass it tot the `parse`-function:
+If you already have your key-values in a string, you can pass it to the `parse`-function:
 
 ```typescript
 import { parse } from '@markusberg/key-value-parser'
@@ -75,23 +80,10 @@ The parsed data is always in the form of `Record<string, string>`. If you want t
 import { z } from 'zod'
 import { loadAndParse } from '@markusberg/key-value-parser'
 
-/**
- * Zod preprocessor
- * Accept strings, floats or ints, but output ints
- */
-export const StringToIntSchema = z.preprocess((arg) => {
-  if (typeof arg === 'number') {
-    return Math.round(arg)
-  } else if (typeof arg === 'string') {
-    return parseInt(arg)
-  }
-  return arg
-}, z.number().int())
-
 // The expected schema
 export const EnvSchema = z.object({
   SERVER_HOST: z.string(),
-  SERVER_PORT: StringToIntSchema,
+  SERVER_PORT: z.coerce.number().int().positive(),
 })
 
 let env: z.infer<typeof EnvSchema>

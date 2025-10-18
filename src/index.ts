@@ -1,9 +1,13 @@
 import { existsSync, readFileSync } from 'node:fs'
 
 /**
- * Load file from disk and parse into KeyValue object
- * @param file
- * @returns
+ * Load and parse a key-value file from disk.
+ *
+ * Verifies that the path exists, reads the file as UTF-8 text and delegates to parse().
+ *
+ * @param file Path to the key-value file to load
+ * @throws Error if the file does not exist
+ * @returns Object mapping keys to their parsed values
  */
 export function loadAndParse(file: string): Record<string, string> {
   if (!existsSync(file)) {
@@ -14,7 +18,25 @@ export function loadAndParse(file: string): Record<string, string> {
 }
 
 /**
- * Key-value parsing logic
+ * Parse a string containing key-value pairs into an object.
+ *
+ * Supported syntax per line:
+ * - key = value
+ * - Keys can contain letters, digits, underscore, dot and hyphen
+ * - Values can be unquoted or wrapped in single/double/backtick quotes
+ * - Quoted values preserve whitespace and can contain escaped quotes
+ * - Lines starting with # are treated as comments
+ * - Blank lines are ignored
+ *
+ * Examples:
+ * ```
+ * FOO=bar
+ * PATH="/some/path with spaces"
+ * NOTE='contains \'quotes\''
+ * ```
+ *
+ * @param src Text content to parse (file contents or raw string)
+ * @returns Object mapping keys to their parsed values
  */
 export function parse(src: string): Record<string, string> {
   const obj: Record<string, string> = {}
