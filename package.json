@@ -1,6 +1,6 @@
 {
   "name": "@markusberg/key-value-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple key-value parser",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

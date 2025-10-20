@@ -1,6 +1,6 @@
 [![node.js build](https://github.com/markusberg/key-value-parser/actions/workflows/main.yaml/badge.svg)](https://github.com/markusberg/key-value-parser/actions/workflows/main.yaml)
-![coverage](https://markusberg.github.io/key-value-parser/badges/coverage-1.0.2.svg)
-![version](https://img.shields.io/npm/v/key-value-parser.svg)
+![coverage](https://markusberg.github.io/key-value-parser/badges/coverage-1.0.3.svg)
+![version](https://img.shields.io/npm/v/@markusberg/key-value-parser.svg)
 [![license](https://img.shields.io/github/license/markusberg/key-value-parser.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # key-value-parser
