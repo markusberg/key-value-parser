@@ -1,9 +1,14 @@
 {
   "name": "@markusberg/key-value-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple key-value parser",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "type": "module",
   "scripts": {
